@@ -1,0 +1,114 @@
+.detalles-container {
+  background-color: #0d1117;
+  color: white;
+  min-height: 100vh;
+  padding: 2rem 1rem 5rem;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.detalles-title {
+  margin-bottom: 2rem;
+  color: #60a5fa;
+  font-size: 1.8rem;
+}
+
+/* ✅ Grid fijo: 2 columnas en PC, 1 en móvil */
+.detalles-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+/* 🔧 Tarjeta base */
+.detalles-card {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.detalles-card:hover {
+  border-color: #60a5fa;
+}
+
+.detalles-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.detalles-card h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #93c5fd;
+}
+
+/* ✅ Solo el expandido cambia color y muestra info */
+.detalles-card.expanded {
+  background-color: #111827;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.3);
+}
+
+.detalles-card.expanded img {
+  transform: scale(1.03);
+}
+
+/* Información desplegable */
+.detalles-info {
+  margin-top: 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #d1d5db;
+  line-height: 1.4;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+/* ✅ Cuando está expandido, solo este se abre */
+.detalles-card.expanded .detalles-info {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* ✅ Responsivo */
+@media (max-width: 900px) {
+  .detalles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .detalles-container {
+    padding: 1rem 0.5rem 5rem;
+  }
+
+  .detalles-title {
+    font-size: 1.4rem;
+  }
+
+  .detalles-card {
+    padding: 0.75rem;
+    max-width: 95%;
+  }
+
+  .detalles-card img {
+    height: 150px;
+  }
+
+  .detalles-info {
+    font-size: 0.85rem;
+  }
+}

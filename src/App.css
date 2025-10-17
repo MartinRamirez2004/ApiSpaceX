@@ -1,42 +1,68 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100dvh; /* ✅ mejor que 100vh en móviles modernos */
+  background-color: #0d1117; /* mismo color base del Home */
+  color: white;
+  overflow-x: hidden; /* evita desplazamiento horizontal */
+  box-sizing: border-box;
+}
+
+/* Asegura que todo el contenido se mantenga visible y centrado */
+header {
+  width: 100%;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* El área principal se ajusta al espacio restante */
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Footer (barra inferior fija o espacio para ella) */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  /* no uses height aquí si ya tienes la barra BottomBar */
+}
+
+/* ⚡ Ajustes específicos para móviles */
+@media (max-width: 768px) {
+  .app-container {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); /* deja espacio para la BottomBar */
+    min-height: 100dvh;
   }
-  to {
-    transform: rotate(360deg);
+
+  main {
+    padding: 0.5rem;
+    align-items: center;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* ⚙️ Para prevenir saltos o espacios en navegadores antiguos */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: #0d1117;
+  color: white;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }

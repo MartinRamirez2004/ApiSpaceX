@@ -1,0 +1,87 @@
+/* BottomBar.css - corregido y responsivo con blur y safe-area support */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(22, 27, 34, 0.75); /* semitransparente */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-top: 1px solid rgba(48, 54, 61, 0.8);
+  z-index: 100;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  /* no uses env() a solas */
+}
+
+.bottom-bar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.bottom-bar button {
+  flex: 1;
+  min-width: 60px;
+  max-width: 100px;
+  background: none;
+  border: none;
+  color: #c9d1d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+  padding: 0.3rem 0.4rem;
+}
+
+.bottom-bar button svg {
+  margin-bottom: 3px;
+  width: 20px;
+  height: 20px;
+}
+
+.bottom-bar button:hover {
+  color: #58a6ff;
+  transform: translateY(-2px);
+}
+
+.bottom-bar button.active {
+  color: #58a6ff;
+  font-weight: 600;
+}
+
+/* Móviles: añadir safe-area paddings con fallback */
+@media (max-width: 600px) {
+  .bottom-bar {
+    justify-content: space-between;
+    /* agregar safe-area insets para evitar que la barra quede cortada
+       env(variable, fallback) -> fallback para navegadores que no lo soporten */
+    padding: calc(0.5rem + env(safe-area-inset-bottom, 0px)) env(safe-area-inset-right, 0px) calc(0.5rem + env(safe-area-inset-bottom, 0px)) env(safe-area-inset-left, 0px);
+  }
+
+  .bottom-bar button {
+    font-size: 0.75rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .bottom-bar button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Evita que el contenido quede oculto detrás de la barra:
+   usa el valor total estimado de la barra (ajusta si la barra cambia) */
+.app-with-bottom-bar {
+  padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Si usas body en vez de contenedor, puedes comentar la siguiente línea
+   y usar .app-with-bottom-bar en tu wrapper principal (recomendado). */
+/* body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); } */
